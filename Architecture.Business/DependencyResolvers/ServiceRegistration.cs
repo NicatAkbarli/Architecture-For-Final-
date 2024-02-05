@@ -2,19 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Architecture.Business.Abstract;
+using Architecture.Business.AutoMapper;
 using Architecture.Business.Concrete;
 using Architecture.Business.Consumers;
-using AutoMapper;
-using Ecommerce.Business.AutoMapper;
+using Architecture.DataAccess.Abstract;
+using Architecture.DataAccess.Concrete.EntityFramework;
+using Architecture.Entities.Commands;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Architecture.Business.DependencyResolvers
+namespace Architecture.Business.DependencyResolvers;
+
+public static class ServiceRegistration
 {
-    public class ServiceRegistration
-    {
-        
     public static void AddBusinesRegistration(this IServiceCollection services)
     {
         services.AddDbContext<AppDbContext>();
@@ -58,5 +60,4 @@ namespace Architecture.Business.DependencyResolvers
             });
 
     }
-}
 }

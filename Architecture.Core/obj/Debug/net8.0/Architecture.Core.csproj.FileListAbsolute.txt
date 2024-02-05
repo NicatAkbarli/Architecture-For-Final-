@@ -1,0 +1,6 @@
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Core\obj\Debug\net8.0\Architecture.Core.csproj.AssemblyReference.cache
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Core\obj\Debug\net8.0\Architecture.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Core\obj\Debug\net8.0\Architecture.Core.AssemblyInfoInputs.cache
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Core\obj\Debug\net8.0\Architecture.Core.AssemblyInfo.cs
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Core\obj\Debug\net8.0\Architecture.Core.csproj.CoreCompileInputs.cache
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Core\obj\Debug\net8.0\Architecture.Core.sourcelink.json

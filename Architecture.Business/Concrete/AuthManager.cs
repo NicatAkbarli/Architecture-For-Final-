@@ -7,6 +7,10 @@ using Architecture.Core.Utilities.Results.Concrete.ErrorResults;
 using Architecture.Core.Utilities.Results.Concrete.SuccessResults;
 using Architecture.Core.Utilities.Security.Hashing;
 using Architecture.Core.Utilities.Security.Jwt;
+using Architecture.DataAccess.Abstract;
+using Architecture.Entities.Commands;
+using Architecture.Entities.Concrete;
+using Architecture.Entities.Dtos.AuthDtos;
 using AutoMapper;
 using MassTransit;
 

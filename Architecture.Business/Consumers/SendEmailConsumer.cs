@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Architecture.Entities.Commands;
 using MassTransit;
 
 namespace Architecture.Business.Consumers

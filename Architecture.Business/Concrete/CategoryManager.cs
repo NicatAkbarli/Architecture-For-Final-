@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Architecture.Core.Utilities.Results.Abstract;
 using Architecture.Core.Utilities.Results.Concrete.ErrorResults;
 using Architecture.Core.Utilities.Results.Concrete.SuccessResults;
+using Architecture.DataAccess.Abstract;
 using Architecture.Entities.Concrete;
+using Architecture.Entities.Dtos.CategoryDtos;
 using AutoMapper;
 
 namespace Architecture.Business.Concrete

@@ -22,7 +22,7 @@ public class CategoryController : ControllerBase
     [HttpPost("add")]
     public async Task<IActionResult> Add([FromBody]CategoryCreateDto addCategoryDto)
     {
-       var res =  _categoryServicee.CreateCategory(addCategoryDto);
+       var res = _categoryService.CreateCategory(addCategoryDto); 
         return Ok(res);
     }
 }
