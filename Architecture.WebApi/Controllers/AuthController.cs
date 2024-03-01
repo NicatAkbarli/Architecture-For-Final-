@@ -12,9 +12,9 @@ namespace Architecture.WebApi.Controllers;
 [Route("api/[controller]")]
 public class AuthController : ControllerBase
 {
-    private readonly IAuthService _authService;
+    private readonly IUserService _authService;
 
-    public AuthController(IAuthService authService)
+    public AuthController(IUserService authService)
     {
         _authService = authService;
     }

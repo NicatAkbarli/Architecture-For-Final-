@@ -8,5 +8,5 @@ namespace Architecture.Entities.Dtos.CategoryDtos;
 public class CategoryCreateDto
 {
     public string CategoryName { get; set; }
-    public string Description { get; set; }
+    public string PhotoUrl { get; set; }
 }

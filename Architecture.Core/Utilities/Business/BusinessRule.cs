@@ -6,7 +6,7 @@ using Architecture.Core.Utilities.Results.Abstract;
 using Architecture.Core.Utilities.Results.Concrete.ErrorResults;
 using Architecture.Core.Utilities.Results.Concrete.SuccessResults;
 
-namespace Architecture.Core.Utilities.Business;
+namespace Architecture.Core.Utilities;
 
 public class BusinessRule
 {

@@ -11,7 +11,7 @@ public class AppDbContext : DbContext
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=127.0.0.1,1433;Database=K318ArchitectureDb; User Id=SA; Password=Ehmed123; TrustServerCertificate=True;");
+        optionsBuilder.UseSqlServer("Server=localhost;Database=K318Finals;Trusted_Connection=True;MultipleActiveResultSets=true; TrustServerCertificate=True");
     }
 
     public DbSet<Advertisement> Advertisements { get; set; }
@@ -19,10 +19,16 @@ public class AppDbContext : DbContext
     public DbSet<Category> Categories { get; set; }
     public DbSet<Comment> Comments { get; set; }
     public DbSet<CommentPhoto> CommentPhotos { get; set; }
+    public DbSet<Specification> Specifications { get; set; }
+
     public DbSet<Follower> Followers { get; set; }
+     public DbSet<Order> Orders { get; set; }
     public DbSet<Product> Products { get; set; }
+    public DbSet<Tag> Tags { get; set; }
     public DbSet<Shop> Shops { get; set; }
     public DbSet<User> Users { get; set; }
+    public DbSet<WishList> wishLists { get; set; }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -37,6 +43,8 @@ public class AppDbContext : DbContext
             .WithMany()
             .HasForeignKey(f => f.ShopId)
             .OnDelete(DeleteBehavior.Restrict);
+            
+        
 
         modelBuilder.Entity<Advertisement>()
          .HasOne(f => f.Shop)
@@ -55,6 +63,7 @@ public class AppDbContext : DbContext
         .WithMany(u => u.Comments)
         .HasForeignKey(f => f.ProductId)
         .OnDelete(DeleteBehavior.Restrict);
+        
 
         modelBuilder.Entity<Comment>()
                   .HasOne(f => f.User)

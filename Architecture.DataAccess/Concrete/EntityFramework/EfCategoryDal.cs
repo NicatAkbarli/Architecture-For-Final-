@@ -10,6 +10,12 @@ using Microsoft.EntityFrameworkCore;
 namespace Architecture.DataAccess.Concrete.EntityFramework;
 
 public class EfCategoryDal : EfRepositoryBase<Category, AppDbContext>, ICategoryDal
-{
-    
-}
+    {
+        public async Task AddCategoryAsync(Category category)
+        {
+            using var context = new AppDbContext();
+            await context.Categories.AddAsync(category);
+            await context.SaveChangesAsync();
+        }
+    }
+

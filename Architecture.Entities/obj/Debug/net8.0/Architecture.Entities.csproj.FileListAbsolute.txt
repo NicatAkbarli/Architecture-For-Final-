@@ -1,0 +1,16 @@
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Entities\obj\Debug\net8.0\Architecture.Entities.csproj.AssemblyReference.cache
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Entities\obj\Debug\net8.0\Architecture.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Entities\obj\Debug\net8.0\Architecture.Entities.AssemblyInfoInputs.cache
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Entities\obj\Debug\net8.0\Architecture.Entities.AssemblyInfo.cs
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Entities\obj\Debug\net8.0\Architecture.Entities.csproj.CoreCompileInputs.cache
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Entities\obj\Debug\net8.0\Architecture.Entities.sourcelink.json
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Entities\bin\Debug\net8.0\Architecture.Entities.deps.json
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Entities\bin\Debug\net8.0\Architecture.Entities.dll
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Entities\bin\Debug\net8.0\Architecture.Entities.pdb
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Entities\bin\Debug\net8.0\Architecture.Core.dll
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Entities\bin\Debug\net8.0\Architecture.Core.pdb
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Entities\obj\Debug\net8.0\Architecture.Entities.csproj.CopyComplete
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Entities\obj\Debug\net8.0\Architecture.Entities.dll
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Entities\obj\Debug\net8.0\refint\Architecture.Entities.dll
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Entities\obj\Debug\net8.0\Architecture.Entities.pdb
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Entities\obj\Debug\net8.0\ref\Architecture.Entities.dll

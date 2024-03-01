@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Architecture.Core.DataAccess.EntityFramework.Abstract;
+using Architecture.Core.DataAccess.EntityFramework.Abstract.Abstract;
 using Architecture.Core.Entities.Abstract;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -50,5 +51,4 @@ public class EfRepositoryBase<TEntity, TContext> : IRepositoryBase<TEntity>
         var updateEntity = context.Entry(entity);
         updateEntity.State = EntityState.Modified;
         context.SaveChanges();
-    }
-}
+    }}
