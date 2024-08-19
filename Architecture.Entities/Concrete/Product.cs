@@ -8,6 +8,7 @@ namespace Architecture.Entities.Concrete;
 
 public class Product : BaseEntity, IEntity
 {
+    public List<Order> Orders { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
     public string PhotoUrl { get; set; }

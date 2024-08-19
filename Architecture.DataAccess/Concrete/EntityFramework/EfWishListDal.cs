@@ -1,26 +1,33 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Architecture.Core.DataAccess.EntityFramework.Concrete;
+using Microsoft.EntityFrameworkCore;
 using Architecture.DataAccess.Abstract;
 using Architecture.Entities.Concrete;
-using Microsoft.EntityFrameworkCore;
+using Architecture.Core.DataAccess.EntityFramework.Concrete;
 
 namespace Architecture.DataAccess.Concrete.EntityFramework
 {
-    public class EfWishListDal: EfRepositoryBase<WishList, AppDbContext>, IWishListDal
+    public class EfWishListDal : EfRepositoryBase<WishList, AppDbContext>, IWishListDal
     {
-        public void Add()
+        private readonly AppDbContext _context;
+
+        public EfWishListDal(AppDbContext context) 
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+
+        public void Add(WishList entity)
+        {
+            _context.WishLists.Add(entity);
+            _context.SaveChanges();
         }
 
         public List<WishList> GetUserWishList(int id)
         {
-            using var context = new AppDbContext();
-            var result = context.wishLists.Where(x=>x.UserId == id).Include(x=>x.Product).ToList();
-            return result;
+            return _context.WishLists
+                .Where(x => x.UserId == id)
+                .Include(x => x.Product)
+                .ToList();
         }
     }
 }

@@ -144,9 +144,9 @@ C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.WebApi\obj\Debu
 C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.WebApi\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Architecture.WebApi.props
 C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.WebApi\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.WebApi\obj\Debug\net8.0\scopedcss\bundle\Architecture.WebApi.styles.css
-C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.WebApi\obj\Debug\net8.0\Architecture.WebApi.csproj.CopyComplete
 C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.WebApi\obj\Debug\net8.0\Architecture.WebApi.dll
 C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.WebApi\obj\Debug\net8.0\refint\Architecture.WebApi.dll
 C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.WebApi\obj\Debug\net8.0\Architecture.WebApi.pdb
 C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.WebApi\obj\Debug\net8.0\Architecture.WebApi.genruntimeconfig.cache
 C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.WebApi\obj\Debug\net8.0\ref\Architecture.WebApi.dll
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.WebApi\obj\Debug\net8.0\Architec.7C82606C.Up2Date

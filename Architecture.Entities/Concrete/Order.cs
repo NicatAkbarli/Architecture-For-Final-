@@ -6,6 +6,7 @@ namespace Architecture.Entities.Concrete
 {
 	public class Order : BaseEntity, IEntity
     {
+		public List<Order> Orders { get; set; }
 		public int ProductId { get; set; }
 		public Product Product { get; set; }
 		public int AppUserId { get; set; }

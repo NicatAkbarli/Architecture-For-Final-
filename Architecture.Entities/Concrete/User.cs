@@ -9,6 +9,7 @@ namespace Architecture.Entities.Concrete;
 
 public class User : BaseUser, IEntity
 {
+    public List<Order> Orders { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public List<Follower> Followers { get; set; }

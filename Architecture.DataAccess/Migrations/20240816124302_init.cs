@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Architecture.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -286,6 +286,7 @@ namespace Architecture.DataAccess.Migrations
                     DeliveryAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OrderEnum = table.Column<int>(type: "int", nullable: false),
                     OrderNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OrderId = table.Column<int>(type: "int", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -296,13 +297,18 @@ namespace Architecture.DataAccess.Migrations
                         column: x => x.AppUserId,
                         principalTable: "BaseUser",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Orders_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Orders_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -352,7 +358,7 @@ namespace Architecture.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "wishLists",
+                name: "WishLists",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -363,19 +369,19 @@ namespace Architecture.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_wishLists", x => x.Id);
+                    table.PrimaryKey("PK_WishLists", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_wishLists_BaseUser_UserId",
+                        name: "FK_WishLists_BaseUser_UserId",
                         column: x => x.UserId,
                         principalTable: "BaseUser",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_wishLists_Products_ProductId",
+                        name: "FK_WishLists_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -455,6 +461,11 @@ namespace Architecture.DataAccess.Migrations
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Orders_OrderId",
+                table: "Orders",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_ProductId",
                 table: "Orders",
                 column: "ProductId");
@@ -495,13 +506,13 @@ namespace Architecture.DataAccess.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_wishLists_ProductId",
-                table: "wishLists",
+                name: "IX_WishLists_ProductId",
+                table: "WishLists",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_wishLists_UserId",
-                table: "wishLists",
+                name: "IX_WishLists_UserId",
+                table: "WishLists",
                 column: "UserId");
         }
 
@@ -533,7 +544,7 @@ namespace Architecture.DataAccess.Migrations
                 name: "UserRole");
 
             migrationBuilder.DropTable(
-                name: "wishLists");
+                name: "WishLists");
 
             migrationBuilder.DropTable(
                 name: "Comments");

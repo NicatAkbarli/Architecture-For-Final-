@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Architecture.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240217144112_initial")]
-    partial class initial
+    [Migration("20240816124302_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -330,6 +330,9 @@ namespace Architecture.DataAccess.Migrations
                     b.Property<int>("OrderEnum")
                         .HasColumnType("int");
 
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
                     b.Property<string>("OrderNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -346,6 +349,8 @@ namespace Architecture.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
+
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("ProductId");
 
@@ -538,7 +543,7 @@ namespace Architecture.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("wishLists");
+                    b.ToTable("WishLists");
                 });
 
             modelBuilder.Entity("Architecture.Entities.Concrete.User", b =>
@@ -665,15 +670,19 @@ namespace Architecture.DataAccess.Migrations
             modelBuilder.Entity("Architecture.Entities.Concrete.Order", b =>
                 {
                     b.HasOne("Architecture.Entities.Concrete.User", "AppUser")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Architecture.Entities.Concrete.Order", null)
+                        .WithMany("Orders")
+                        .HasForeignKey("OrderId");
+
                     b.HasOne("Architecture.Entities.Concrete.Product", "Product")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("AppUser");
@@ -738,13 +747,13 @@ namespace Architecture.DataAccess.Migrations
                     b.HasOne("Architecture.Entities.Concrete.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Architecture.Entities.Concrete.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Product");
@@ -762,11 +771,18 @@ namespace Architecture.DataAccess.Migrations
                     b.Navigation("CommentPhotos");
                 });
 
+            modelBuilder.Entity("Architecture.Entities.Concrete.Order", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
             modelBuilder.Entity("Architecture.Entities.Concrete.Product", b =>
                 {
                     b.Navigation("Advertisements");
 
                     b.Navigation("Comments");
+
+                    b.Navigation("Orders");
 
                     b.Navigation("Specifications");
                 });
@@ -783,6 +799,8 @@ namespace Architecture.DataAccess.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Followers");
+
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

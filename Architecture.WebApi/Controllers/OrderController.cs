@@ -26,7 +26,7 @@ namespace Architecture.WebApi.Controllers
             _appUserService = appUserService;
         }
 
-        [Authorize]
+        
         [HttpPost("create")]
         public IActionResult OrderProduct([FromBody]List<OrderCreateDto> orderCreate)
         {
@@ -39,7 +39,7 @@ namespace Architecture.WebApi.Controllers
             return Ok(res);
         }
 
-        [Authorize]
+        
         [HttpGet("userorder")]
         public IActionResult OrderUser()
         {
@@ -51,7 +51,7 @@ namespace Architecture.WebApi.Controllers
             return Ok(userOrder);
         }
 
-        [Authorize]
+        
         [HttpGet("get/{ordernumber}")]
         public IActionResult OrderUser(string ordernumber)
         {

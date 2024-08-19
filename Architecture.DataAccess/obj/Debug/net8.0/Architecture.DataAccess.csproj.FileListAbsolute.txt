@@ -12,9 +12,9 @@ C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.DataAccess\obj\
 C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.DataAccess\obj\Debug\net8.0\Architecture.DataAccess.AssemblyInfo.cs
 C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.DataAccess\obj\Debug\net8.0\Architecture.DataAccess.csproj.CoreCompileInputs.cache
 C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.DataAccess\obj\Debug\net8.0\Architecture.DataAccess.sourcelink.json
-C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.DataAccess\obj\Debug\net8.0\Architecture.DataAccess.csproj.CopyComplete
 C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.DataAccess\obj\Debug\net8.0\Architecture.DataAccess.dll
 C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.DataAccess\obj\Debug\net8.0\refint\Architecture.DataAccess.dll
 C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.DataAccess\obj\Debug\net8.0\Architecture.DataAccess.pdb
 C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.DataAccess\obj\Debug\net8.0\Architecture.DataAccess.genruntimeconfig.cache
 C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.DataAccess\obj\Debug\net8.0\ref\Architecture.DataAccess.dll
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.DataAccess\obj\Debug\net8.0\Architec.33A107C9.Up2Date

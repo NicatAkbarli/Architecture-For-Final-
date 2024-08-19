@@ -13,8 +13,8 @@ C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Business\bin\De
 C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Business\bin\Debug\net8.0\Architecture.Core.pdb
 C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Business\bin\Debug\net8.0\Architecture.DataAccess.pdb
 C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Business\bin\Debug\net8.0\Architecture.Entities.pdb
-C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Business\obj\Debug\net8.0\Architecture.Business.csproj.CopyComplete
 C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Business\obj\Debug\net8.0\Architecture.Business.dll
 C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Business\obj\Debug\net8.0\refint\Architecture.Business.dll
 C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Business\obj\Debug\net8.0\Architecture.Business.pdb
 C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Business\obj\Debug\net8.0\ref\Architecture.Business.dll
+C:\Users\Victus\Desktop\Final Layihesi\Architecture\Architecture.Business\obj\Debug\net8.0\Architec.171D8BE5.Up2Date
