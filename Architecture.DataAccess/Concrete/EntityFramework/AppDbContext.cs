@@ -37,6 +37,15 @@ public class AppDbContext : DbContext
             .WithMany(p => p.Orders)
             .HasForeignKey(o => o.ProductId)
             .OnDelete(DeleteBehavior.Restrict);
+        
+        base.OnModelCreating(modelBuilder);
+      
+
+          modelBuilder.Entity<User>().ToTable("Users");
+            modelBuilder.Entity<Shop>()
+            .HasOne(s => s.User)
+            .WithMany(u => u.Shops)
+            .HasForeignKey(s => s.UserId);
 
         modelBuilder.Entity<Order>()
             .HasOne(o => o.AppUser)

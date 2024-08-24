@@ -31,6 +31,7 @@ public class AuthController : ControllerBase
 
         return BadRequest(user);
     }
+    
 
     [HttpPost("login")]
     public IActionResult LoginUser([FromBody] LoginDto loginDto)

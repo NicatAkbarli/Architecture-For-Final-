@@ -42,6 +42,7 @@ namespace Architecture.Business.Concrete
         public IResult CreateProduct(ProductCreateDto productCreate)
         {
             var mapper = _mapper.Map<Product>(productCreate);
+            mapper.SeoUrl = "jhskhskj";
             _productDal.Add(mapper);
             _specificationService.CreateSpecifications(mapper.Id, productCreate.Specifications);
             return new SuccessResult();

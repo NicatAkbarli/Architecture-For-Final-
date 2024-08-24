@@ -13,7 +13,7 @@ public class Product : BaseEntity, IEntity
     public string Description { get; set; }
     public string PhotoUrl { get; set; }
     public string SeoUrl { get; set; }
-    public string KeyWords { get; set; }
+    
     public decimal Price { get; set; }
     public int CategoryId { get; set; }
     public Category Category { get; set; }

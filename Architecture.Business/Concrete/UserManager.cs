@@ -31,6 +31,11 @@ namespace Architecture.Business.Concrete
             _publishEndpoint = publishEndpoint;
         }
 
+            public Task<List<UserInfoDto>> GetAllUsers()
+            {
+                throw new NotImplementedException();
+            }
+
         public IDataResult<UserOrderDto> GetUserOrders(int id)
         {
             throw new NotImplementedException();
@@ -43,13 +48,7 @@ namespace Architecture.Business.Concrete
 
         public IDataResult<LoginUserDto> Login(LoginDto loginDto)
     {
-        // var userToCheck = BusinessRule.Run(
-        //     CheckIsUserActive(loginDto),
-        //     CheckUserPassword(loginDto)
-        //     );
-
-        // if (!userToCheck.Success)
-        //     return new ErrorDataResult<LoginUserDto>(null);
+      
 
         var user = _userDal.GetUserByEmail(loginDto.Email);
 
@@ -82,7 +81,7 @@ namespace Architecture.Business.Concrete
         sendEmail.Token = Guid.NewGuid().ToString();
         _publishEndpoint.Publish<SendEmailCommand>(sendEmail);
 
-        // _userDal.Add(mapp);
+        _userDal.Add(mapp);
         return new SuccessResult();
     }
 

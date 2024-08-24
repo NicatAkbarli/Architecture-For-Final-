@@ -15,6 +15,7 @@ namespace Architecture.Business.Abstract
     IResult Register(RegisterDto registerDto);
     IDataResult<LoginUserDto> Login(LoginDto loginDto);
     IResult VerifyEmail(string token, string Email);
+    Task<List<UserInfoDto>> GetAllUsers();
     IResult ResetPassword(string email);
     // IResult ChangePassword(ChangePasswordDto changePasswordDto);
     IResult VerifyResetPassword(VerifyResetPasswordDto resetPasswordDto);

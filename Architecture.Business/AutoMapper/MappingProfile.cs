@@ -38,7 +38,7 @@ public class MappingProfile : Profile
 			CreateMap<Product, ProductFeaturedDto>();
 			CreateMap<Product, ProductDto>();
 
-			CreateMap<SpecificationCreateDto, ISpecification>();
+			CreateMap<SpecificationCreateDto, Specification>();
 			CreateMap<Specification, SpecificationListDto>();
 
 			CreateMap<UserWishListDto, User>().ReverseMap();
