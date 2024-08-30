@@ -38,7 +38,7 @@ namespace Architecture.Business.Concrete
         {
             var productIds = orderCreate.Select(x => x.ProductId).ToList();
             var quantity = orderCreate.Select(x => x.Quantity).ToList();
-            //var result = BusinessRule.CheckRules(IsProductInStock(productIds));
+         
             var mapper = _mapper.Map<List<Order>>(orderCreate);
             _orderDal.AddRange(userId, mapper);
             var productOrder = orderCreate.Select(x => new ProductDecrementDto

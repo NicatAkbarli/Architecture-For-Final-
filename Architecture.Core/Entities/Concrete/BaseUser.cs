@@ -6,7 +6,7 @@ using Architecture.Core.Entities.Abstract;
 
 namespace Architecture.Core.Entities.Concrete;
 
-public class BaseUser 
+public abstract class BaseUser 
 {
     public int Id { get; set; }
     public string Email { get; set; }

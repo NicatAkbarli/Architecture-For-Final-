@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,6 +12,7 @@ using MassTransit;
 using Architecture.Entities.Dtos.WishlistDtos;
 using Architecture.Entities.Dtos.OrderDtos;
 using Architecture.Entities.Dtos.UserDtos;
+using Architecture.Entities.Dtos.ShopDto;
 
 namespace Architecture.Business.AutoMapper;
 
@@ -19,43 +20,50 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-			CreateMap<User, UserInfoDto>();
-			CreateMap<RegisterDto, User>();
+        // User Mappings
+        CreateMap<User, UserInfoDto>();
+        CreateMap<RegisterDto, User>();
 
-			CreateMap<CategoryCreateDto, Category>();
-			CreateMap<CategoryUpdateDto, Category>();
-            CreateMap<Category, CategoryDto>();
-            CreateMap<Category, CategoryHomeDto>();
-            CreateMap<Category, CategoryNavbarDto>();
+        CreateMap<ShopDto, Shop>()
+            .ForMember(dest => dest.User, opt => opt.MapFrom(src => new User { Id = src.UserId }))
+            .ReverseMap();
 
-
-			CreateMap<Product, ProductDetailDto>();
-			CreateMap<ProductUpdateDto, Product>();
-			CreateMap<ProductCreateDto, Product>();
-
-			CreateMap<Product, ProductRecentDto>();
-			CreateMap<Product, ProductFilterDto>();
-			CreateMap<Product, ProductFeaturedDto>();
-			CreateMap<Product, ProductDto>();
-
-			CreateMap<SpecificationCreateDto, Specification>();
-			CreateMap<Specification, SpecificationListDto>();
-
-			CreateMap<UserWishListDto, User>().ReverseMap();
-			CreateMap<WishList, WishlistItemDto>()
-				.ForMember(x=>x.ProductName, o=>o.MapFrom(s=>s.Product.Title))
-				.ForMember(x=>x.Price, o=>o.MapFrom(s=>s.Product.Price));
-
-			CreateMap<WishListAddItemDto, WishList>();
+        CreateMap<Shop, ShopDto>()
+            .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.User.Id));
 
 
-			CreateMap<OrderCreateDto, Order>();
+        // Diğer Mappings
+        CreateMap<CategoryCreateDto, Category>();
+        CreateMap<CategoryUpdateDto, Category>();
+        CreateMap<Category, CategoryDto>();
+        CreateMap<Category, CategoryHomeDto>();
+        CreateMap<Category, CategoryNavbarDto>();
 
-			CreateMap<User, UserOrderDto>();
-        
+        CreateMap<Product, ProductDetailDto>();
+        CreateMap<ProductUpdateDto, Product>();
+        CreateMap<ProductCreateDto, Product>();
 
-			CreateMap<Order, OrderUserDto>()
-						.ForMember(x => x.ProductName, o => o.MapFrom(x => x.Product.Title))
-						.ForMember(x => x.OrderEnum, o => o.MapFrom(x => Enum.GetName(x.OrderEnum)));
-        }
+        CreateMap<Product, ProductRecentDto>();
+        CreateMap<Product, ProductFilterDto>();
+        CreateMap<Product, ProductFeaturedDto>();
+        CreateMap<Product, ProductDto>();
+
+        CreateMap<SpecificationCreateDto, Specification>();
+        CreateMap<Specification, SpecificationListDto>();
+
+        CreateMap<UserWishListDto, User>().ReverseMap();
+        CreateMap<WishList, WishlistItemDto>()
+            .ForMember(x => x.ProductName, o => o.MapFrom(s => s.Product.Title))
+            .ForMember(x => x.Price, o => o.MapFrom(s => s.Product.Price));
+
+        CreateMap<WishListAddItemDto, WishList>();
+
+        CreateMap<OrderCreateDto, Order>();
+
+        CreateMap<User, UserOrderDto>();
+
+        CreateMap<Order, OrderUserDto>()
+            .ForMember(x => x.ProductName, o => o.MapFrom(x => x.Product.Title))
+            .ForMember(x => x.OrderEnum, o => o.MapFrom(x => Enum.GetName(x.OrderEnum)));
+    }
 }

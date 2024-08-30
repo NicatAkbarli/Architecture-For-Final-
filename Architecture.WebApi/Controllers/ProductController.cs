@@ -26,12 +26,13 @@ namespace Architecture.WebApi.Controllers
         }
 
         [HttpPost("create")]
-        public IActionResult CreateProduct([FromBody] ProductCreateDto productCreate)
+        public IActionResult CreateProduct([FromBody] ProductCreateDto productCreate )
         {
             var _bearer_token = Request.Headers[HeaderNames.Authorization].ToString().Replace("Bearer ", "");
             var handler = new JwtSecurityTokenHandler();
             var jwtSecurityToken = handler.ReadJwtToken(_bearer_token);
             var userId = jwtSecurityToken.Claims.FirstOrDefault(x => x.Type == "nameid").Value;
+           
             var result = _productService.CreateProduct(productCreate);
             return Ok(result);
         }

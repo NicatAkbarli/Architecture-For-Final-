@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -42,31 +43,35 @@ public class ShopController : ControllerBase
         var shopDto = _mapper.Map<ShopDto>(shop);
         return Ok(shopDto);
     }
-
-   // POST: api/Shop
-[HttpPost]
-public async Task<ActionResult<ShopDto>> AddShop([FromBody] ShopDto newShopDto)
-{
-    if (newShopDto == null || string.IsNullOrWhiteSpace(newShopDto.ShopName))
+    [Authorize]
+    [HttpPost]
+    public async Task<ActionResult<ShopDto>> AddShop([FromBody] ShopDto newShopDto)
     {
-        return BadRequest("Shop is invalid.");
+        if (newShopDto == null || string.IsNullOrWhiteSpace(newShopDto.ShopName))
+        {
+            return BadRequest("Shop is invalid.");
+        }
+
+        // Kullanıcıyı veritabanında bul
+        var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == newShopDto.UserId);
+        if (user == null)
+        {
+            return NotFound("User not found.");
+        }
+
+        var newShop = _mapper.Map<Shop>(newShopDto);
+        // User'ı Shop'a atayın
+        newShop.User = user;
+
+        _context.Shops.Add(newShop);
+        await _context.SaveChangesAsync();
+
+        var createdShopDto = _mapper.Map<ShopDto>(newShop);
+        return CreatedAtAction(nameof(GetShop), new { id = newShop.Id }, createdShopDto);
     }
 
-    // Kullanıcıyı veritabanında bul
-  
-var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == newShopDto.UserId);
-if (user == null)
-{
-    return NotFound("User not found.");
-}
 
-    var newShop = _mapper.Map<Shop>(newShopDto);
-    _context.Shops.Add(newShop);
-    await _context.SaveChangesAsync();
 
-    var createdShopDto = _mapper.Map<ShopDto>(newShop);
-    return CreatedAtAction(nameof(GetShop), new { id = newShop.Id }, createdShopDto);
-}
 
 
     // PUT: api/Shop/5

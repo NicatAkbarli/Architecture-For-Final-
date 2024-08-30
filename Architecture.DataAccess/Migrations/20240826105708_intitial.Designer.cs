@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Architecture.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240816124302_init")]
-    partial class init
+    [Migration("20240826105708_intitial")]
+    partial class intitial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,56 +24,6 @@ namespace Architecture.DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Architecture.Core.Entities.Concrete.BaseUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ConfirmationToken")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DeactiveTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeactive")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("LoginAttempt")
-                        .HasColumnType("int");
-
-                    b.Property<byte[]>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<byte[]>("PasswordSalt")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("BaseUser");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("BaseUser");
-
-                    b.UseTphMappingStrategy();
-                });
 
             modelBuilder.Entity("Architecture.Core.Entities.Concrete.Role", b =>
                 {
@@ -106,11 +56,14 @@ namespace Architecture.DataAccess.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("BaseUserId");
-
                     b.HasIndex("RoleId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserRole");
                 });
@@ -390,10 +343,6 @@ namespace Architecture.DataAccess.Migrations
                     b.Property<bool>("IsFeatured")
                         .HasColumnType("bit");
 
-                    b.Property<string>("KeyWords")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PhotoUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -444,6 +393,9 @@ namespace Architecture.DataAccess.Migrations
 
                     b.Property<string>("PhotoUrl")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShopName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
@@ -520,6 +472,60 @@ namespace Architecture.DataAccess.Migrations
                     b.ToTable("Tags");
                 });
 
+            modelBuilder.Entity("Architecture.Entities.Concrete.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ConfirmationToken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DeactiveTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeactive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LoginAttempt")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<int>("ShopId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users", (string)null);
+
+                    b.HasDiscriminator().HasValue("User");
+                });
+
             modelBuilder.Entity("Architecture.Entities.Concrete.WishList", b =>
                 {
                     b.Property<int>("Id")
@@ -546,36 +552,17 @@ namespace Architecture.DataAccess.Migrations
                     b.ToTable("WishLists");
                 });
 
-            modelBuilder.Entity("Architecture.Entities.Concrete.User", b =>
-                {
-                    b.HasBaseType("Architecture.Core.Entities.Concrete.BaseUser");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasDiscriminator().HasValue("User");
-                });
-
             modelBuilder.Entity("Architecture.Core.Entities.Concrete.UserRole", b =>
                 {
-                    b.HasOne("Architecture.Core.Entities.Concrete.BaseUser", "BaseUser")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("BaseUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Architecture.Core.Entities.Concrete.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("BaseUser");
+                    b.HasOne("Architecture.Entities.Concrete.User", null)
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Role");
                 });
@@ -712,7 +699,7 @@ namespace Architecture.DataAccess.Migrations
             modelBuilder.Entity("Architecture.Entities.Concrete.Shop", b =>
                 {
                     b.HasOne("Architecture.Entities.Concrete.User", "User")
-                        .WithMany()
+                        .WithMany("Shops")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -761,11 +748,6 @@ namespace Architecture.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Architecture.Core.Entities.Concrete.BaseUser", b =>
-                {
-                    b.Navigation("UserRoles");
-                });
-
             modelBuilder.Entity("Architecture.Entities.Concrete.Comment", b =>
                 {
                     b.Navigation("CommentPhotos");
@@ -801,6 +783,10 @@ namespace Architecture.DataAccess.Migrations
                     b.Navigation("Followers");
 
                     b.Navigation("Orders");
+
+                    b.Navigation("Shops");
+
+                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

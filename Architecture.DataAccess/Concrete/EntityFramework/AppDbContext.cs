@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Architecture.Core.Entities.Concrete;
 using Architecture.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +12,7 @@ public class AppDbContext : DbContext
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=localhost;Database=K318Finalss;Trusted_Connection=True;MultipleActiveResultSets=true; TrustServerCertificate=True");
+        optionsBuilder.UseSqlServer("Server=localhost;Database=K318FinalssDbsss;Trusted_Connection=True;MultipleActiveResultSets=true; TrustServerCertificate=True");
     }
 
     public DbSet<Advertisement> Advertisements { get; set; }
@@ -32,16 +33,24 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
+        // Assuming BaseUser has common properties like Id, Name, etc.
+        modelBuilder.Entity<User>().ToTable("Users");
+
+        // Avoid any table creation for BaseUser
+        modelBuilder.Entity<BaseUser>().ToTable("Users");
+
+        modelBuilder.Ignore<BaseUser>(); // Tell EF Core to ignore this type
+
+
+
         modelBuilder.Entity<Order>()
             .HasOne(o => o.Product)
             .WithMany(p => p.Orders)
             .HasForeignKey(o => o.ProductId)
             .OnDelete(DeleteBehavior.Restrict);
         
-        base.OnModelCreating(modelBuilder);
       
-
-          modelBuilder.Entity<User>().ToTable("Users");
             modelBuilder.Entity<Shop>()
             .HasOne(s => s.User)
             .WithMany(u => u.Shops)

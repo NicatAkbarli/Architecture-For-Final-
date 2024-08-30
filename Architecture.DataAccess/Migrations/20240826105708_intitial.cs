@@ -6,34 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Architecture.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class intitial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "BaseUser",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PasswordHash = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    PasswordSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    ConfirmationToken = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LoginAttempt = table.Column<int>(type: "int", nullable: false),
-                    DeactiveTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsDeactive = table.Column<bool>(type: "bit", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BaseUser", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
@@ -66,6 +43,29 @@ namespace Architecture.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ShopId = table.Column<int>(type: "int", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PasswordHash = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    PasswordSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    ConfirmationToken = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LoginAttempt = table.Column<int>(type: "int", nullable: false),
+                    DeactiveTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeactive = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Shops",
                 columns: table => new
                 {
@@ -75,15 +75,16 @@ namespace Architecture.DataAccess.Migrations
                     BannerUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhotoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsVerified = table.Column<bool>(type: "bit", nullable: false),
+                    ShopName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Shops", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Shops_BaseUser_UserId",
+                        name: "FK_Shops_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "BaseUser",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -95,23 +96,23 @@ namespace Architecture.DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BaseUserId = table.Column<int>(type: "int", nullable: false),
-                    RoleId = table.Column<int>(type: "int", nullable: false)
+                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserRole", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_UserRole_BaseUser_BaseUserId",
-                        column: x => x.BaseUserId,
-                        principalTable: "BaseUser",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserRole_Role_RoleId",
                         column: x => x.RoleId,
                         principalTable: "Role",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserRole_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -130,12 +131,6 @@ namespace Architecture.DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_Followers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Followers_BaseUser_UserId",
-                        column: x => x.UserId,
-                        principalTable: "BaseUser",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Followers_Shops_ShopId",
                         column: x => x.ShopId,
                         principalTable: "Shops",
@@ -146,6 +141,12 @@ namespace Architecture.DataAccess.Migrations
                         column: x => x.ShopId1,
                         principalTable: "Shops",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Followers_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -158,7 +159,6 @@ namespace Architecture.DataAccess.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhotoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SeoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    KeyWords = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     Discount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -233,14 +233,14 @@ namespace Architecture.DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_Affiliates", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Affiliates_BaseUser_UserId",
-                        column: x => x.UserId,
-                        principalTable: "BaseUser",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_Affiliates_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Affiliates_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
@@ -260,15 +260,15 @@ namespace Architecture.DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Comments_BaseUser_UserId",
-                        column: x => x.UserId,
-                        principalTable: "BaseUser",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Comments_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Comments_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -293,12 +293,6 @@ namespace Architecture.DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orders_BaseUser_AppUserId",
-                        column: x => x.AppUserId,
-                        principalTable: "BaseUser",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Orders_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
@@ -307,6 +301,12 @@ namespace Architecture.DataAccess.Migrations
                         name: "FK_Orders_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Orders_Users_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -371,15 +371,15 @@ namespace Architecture.DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_WishLists", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WishLists_BaseUser_UserId",
-                        column: x => x.UserId,
-                        principalTable: "BaseUser",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_WishLists_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_WishLists_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -496,14 +496,14 @@ namespace Architecture.DataAccess.Migrations
                 column: "ProductId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserRole_BaseUserId",
-                table: "UserRole",
-                column: "BaseUserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_UserRole_RoleId",
                 table: "UserRole",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserRole_UserId",
+                table: "UserRole",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WishLists_ProductId",
@@ -562,7 +562,7 @@ namespace Architecture.DataAccess.Migrations
                 name: "Shops");
 
             migrationBuilder.DropTable(
-                name: "BaseUser");
+                name: "Users");
         }
     }
 }
